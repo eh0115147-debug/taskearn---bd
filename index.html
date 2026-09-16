@@ -3,24 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>TaskEarn BD</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
   font-family:Arial,sans-serif;
   background:#f5f7fb;
   color:#222;
 }
+
 header{
   background:#0d6efd;
   color:white;
   padding:18px;
   text-align:center;
 }
-header h1{margin:0;font-size:28px}
-header p{margin:7px 0 0}
+
+header h1{
+  margin:0;
+  font-size:28px;
+}
+
+header p{
+  margin:7px 0 0;
+}
 
 nav{
   background:white;
@@ -31,6 +43,7 @@ nav{
   top:0;
   z-index:10;
 }
+
 nav button{
   background:#eef4ff;
   color:#0d6efd;
@@ -47,6 +60,15 @@ nav button{
   padding:20px;
 }
 
+.card{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 3px 12px #ddd;
+  text-align:center;
+  margin-bottom:20px;
+}
+
 .hero{
   text-align:center;
   padding:35px 15px;
@@ -54,8 +76,15 @@ nav button{
   border-radius:15px;
   margin-bottom:20px;
 }
-.hero h2{font-size:28px;margin:10px 0}
-.hero p{color:#666}
+
+.hero h2{
+  font-size:28px;
+  margin:10px 0;
+}
+
+.hero p{
+  color:#666;
+}
 
 .stats{
   display:grid;
@@ -64,17 +93,11 @@ nav button{
   margin-bottom:20px;
 }
 
-.card{
-  background:white;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:0 3px 12px #ddd;
-  text-align:center;
-}
 .card h3{
   color:#0d6efd;
   margin-top:0;
 }
+
 .balance{
   font-size:28px;
   font-weight:bold;
@@ -89,7 +112,10 @@ nav button{
   border-bottom:1px solid #eee;
   padding:15px 5px;
 }
-.task:last-child{border-bottom:0}
+
+.task:last-child{
+  border-bottom:0;
+}
 
 button{
   border:0;
@@ -98,12 +124,29 @@ button{
   cursor:pointer;
   font-size:15px;
 }
-.primary{background:#0d6efd;color:white}
-.success{background:#198754;color:white}
-.warning{background:#ffc107;color:#222}
-.danger{background:#dc3545;color:white}
 
-input,select{
+.primary{
+  background:#0d6efd;
+  color:white;
+}
+
+.success{
+  background:#198754;
+  color:white;
+}
+
+.warning{
+  background:#ffc107;
+  color:#222;
+}
+
+.danger{
+  background:#dc3545;
+  color:white;
+}
+
+input,
+select{
   width:100%;
   padding:12px;
   margin:7px 0;
@@ -111,14 +154,21 @@ input,select{
   border-radius:7px;
 }
 
-.page{display:none}
-.page.active{display:block}
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
 
 .history{
   width:100%;
   border-collapse:collapse;
 }
-.history th,.history td{
+
+.history th,
+.history td{
   padding:11px;
   border-bottom:1px solid #eee;
   text-align:left;
@@ -131,6 +181,13 @@ input,select{
   margin-bottom:15px;
 }
 
+.message{
+  text-align:center;
+  margin-top:10px;
+  color:#198754;
+  font-weight:bold;
+}
+
 footer{
   margin-top:30px;
   padding:22px;
@@ -139,32 +196,13 @@ footer{
   text-align:center;
 }
 
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  z-index:100;
-}
-.box{
-  background:white;
-  width:100%;
+.account{
   max-width:420px;
-  padding:25px;
-  border-radius:12px;
+  margin:20px auto;
 }
-.close{
-  float:right;
-  font-size:24px;
-  cursor:pointer;
-}
-.message{
-  text-align:center;
-  margin-top:10px;
-  color:#198754;
+
+.account button{
+  margin:4px;
 }
 </style>
 </head>
@@ -176,108 +214,251 @@ footer{
   <p>ছোট ছোট টাস্ক সম্পন্ন করে পয়েন্ট অর্জন করুন</p>
 </header>
 
+
 <nav>
-  <button onclick="showPage('home')">🏠 Home</button>
-  <button onclick="showPage('tasks')">📋 Tasks</button>
-  <button onclick="showPage('profile')">👤 Profile</button>
-  <button onclick="showPage('withdraw')">💸 Withdraw</button>
-  <button onclick="showPage('referral')">🎁 Referral</button>
-  <button onclick="showPage('history')">📊 History</button>
-  <button onclick="showPage('leaderboard')">🏆 Leaderboard</button>
+
+  <button onclick="showPage('home')">
+    🏠 Home
+  </button>
+
+  <button onclick="showPage('tasks')">
+    📋 Tasks
+  </button>
+
+  <button onclick="showPage('profile')">
+    👤 Profile
+  </button>
+
+  <button onclick="showPage('withdraw')">
+    💸 Withdraw
+  </button>
+
+  <button onclick="showPage('referral')">
+    🎁 Referral
+  </button>
+
+  <button onclick="showPage('history')">
+    📊 History
+  </button>
+
+  <button onclick="showPage('leaderboard')">
+    🏆 Leaderboard
+  </button>
+
 </nav>
 
+
 <div class="container">
-<div class="card" style="margin:20px auto; max-width:420px;">
+
+
+<!-- ================= ACCOUNT ================= -->
+
+<div class="card account">
+
   <h2>🔐 Account</h2>
 
-  <input id="loginEmail" type="email" placeholder="Email লিখুন">
+  <input
+    id="loginEmail"
+    type="email"
+    placeholder="Email লিখুন"
+  >
 
-  <input id="loginPassword" type="password" placeholder="Password লিখুন">
+  <input
+    id="loginPassword"
+    type="password"
+    placeholder="Password লিখুন"
+  >
 
-  <button class="primary" onclick="loginUser()">
+  <button
+    class="primary"
+    onclick="loginUser()"
+  >
     Login
   </button>
 
-  <button class="success" onclick="registerUser()">
+  <button
+    class="success"
+    onclick="registerUser()"
+  >
     Register
   </button>
 
-  <button class="danger" onclick="logoutUser()">
+  <button
+    class="danger"
+    onclick="logoutUser()"
+  >
     Logout
   </button>
 
-  <p id="authMessage" class="message"></p>
-  </div>
-<!-- HOME -->
-<section id="home" class="page active">
+  <p
+    id="authMessage"
+    class="message"
+  ></p>
+
+</div>
+
+
+<!-- ================= HOME ================= -->
+
+<section
+  id="home"
+  class="page active"
+>
 
   <div class="hero">
-    <h2>TaskEarn BD-তে স্বাগতম 🎉</h2>
-    <p>সহজ টাস্ক সম্পন্ন করুন এবং পয়েন্ট সংগ্রহ করুন।</p>
-    <button class="primary" onclick="showPage('tasks')">
+
+    <h2>
+      TaskEarn BD-তে স্বাগতম 🎉
+    </h2>
+
+    <p>
+      সহজ টাস্ক সম্পন্ন করুন এবং পয়েন্ট সংগ্রহ করুন।
+    </p>
+
+    <button
+      class="primary"
+      onclick="showPage('tasks')"
+    >
       টাস্ক দেখুন
     </button>
+
   </div>
+
 
   <div class="stats">
+
     <div class="card">
+
       <h3>💰 Balance</h3>
-      <div class="balance"><span id="balance">0</span> Points</div>
+
+      <div class="balance">
+        <span id="balance">0</span>
+        Points
+      </div>
+
     </div>
 
+
     <div class="card">
+
       <h3>📋 Completed</h3>
-      <div class="balance" id="completed">0</div>
+
+      <div
+        class="balance"
+        id="completed"
+      >
+        0
+      </div>
+
     </div>
 
+
     <div class="card">
+
       <h3>🎁 Referral</h3>
-      <div class="balance" id="referrals">0</div>
+
+      <div
+        class="balance"
+        id="referrals"
+      >
+        0
+      </div>
+
     </div>
+
   </div>
 
+
   <div class="card">
+
     <h3>🔔 Notification</h3>
-    <p id="notification">TaskEarn BD-তে আপনাকে স্বাগতম!</p>
+
+    <p id="notification">
+      TaskEarn BD-তে আপনাকে স্বাগতম!
+    </p>
+
   </div>
 
 </section>
 
 
-<!-- TASKS -->
-<section id="tasks" class="page">
+<!-- ================= TASKS ================= -->
+
+<section
+  id="tasks"
+  class="page"
+>
 
   <div class="card">
-    <h2>📋 Available Tasks</h2>
+
+    <h2>
+      📋 Available Tasks
+    </h2>
+
 
     <div class="task">
+
       <div>
+
         <b>Task 1</b>
-        <p>একটি সাধারণ টাস্ক সম্পন্ন করুন</p>
+
+        <p>
+          একটি সাধারণ টাস্ক সম্পন্ন করুন
+        </p>
+
       </div>
-      <button class="success" onclick="completeTask(10)">
+
+      <button
+        class="success"
+        onclick="completeTask(10)"
+      >
         +10
       </button>
+
     </div>
 
+
     <div class="task">
+
       <div>
+
         <b>Task 2</b>
-        <p>আরেকটি ছোট টাস্ক সম্পন্ন করুন</p>
+
+        <p>
+          আরেকটি ছোট টাস্ক সম্পন্ন করুন
+        </p>
+
       </div>
-      <button class="success" onclick="completeTask(15)">
+
+      <button
+        class="success"
+        onclick="completeTask(15)"
+      >
         +15
       </button>
+
     </div>
 
+
     <div class="task">
+
       <div>
+
         <b>Task 3</b>
-        <p>নির্ধারিত কাজটি সম্পন্ন করুন</p>
+
+        <p>
+          নির্ধারিত কাজটি সম্পন্ন করুন
+        </p>
+
       </div>
-      <button class="success" onclick="completeTask(20)">
+
+      <button
+        class="success"
+        onclick="completeTask(20)"
+      >
         +20
       </button>
+
     </div>
 
   </div>
@@ -285,96 +466,191 @@ footer{
 </section>
 
 
-<!-- PROFILE -->
-<section id="profile" class="page">
+<!-- ================= PROFILE ================= -->
+
+<section
+  id="profile"
+  class="page"
+>
 
   <div class="card">
-    <h2>👤 My Profile</h2>
 
-    <input id="name" type="text" placeholder="আপনার নাম">
+    <h2>
+      👤 My Profile
+    </h2>
 
-    <input id="email" type="email" placeholder="আপনার Email">
+    <input
+      id="name"
+      type="text"
+      placeholder="আপনার নাম"
+    >
 
-    <button class="primary" onclick="saveProfile()">
+    <input
+      id="profileEmail"
+      type="email"
+      placeholder="আপনার Email"
+    >
+
+    <button
+      class="primary"
+      onclick="saveProfile()"
+    >
       Save Profile
     </button>
 
-    <p id="profileMessage" class="message"></p>
+    <p
+      id="profileMessage"
+      class="message"
+    ></p>
+
   </div>
 
 </section>
 
 
-<!-- WITHDRAW -->
-<section id="withdraw" class="page">
+<!-- ================= WITHDRAW ================= -->
+
+<section
+  id="withdraw"
+  class="page"
+>
 
   <div class="card">
-    <h2>💸 Withdraw Request</h2>
+
+    <h2>
+      💸 Withdraw Request
+    </h2>
 
     <div class="notice">
-      ন্যূনতম Withdraw: <b>50 Points</b>
+
+      ন্যূনতম Withdraw:
+      <b>50 Points</b>
+
     </div>
 
-    <input id="withdrawNumber"
-           type="text"
-           placeholder="bKash/Nagad নম্বর">
 
-    <input id="withdrawAmount"
-           type="number"
-           placeholder="কত Points Withdraw করবেন?">
+    <input
+      id="withdrawNumber"
+      type="text"
+      placeholder="bKash/Nagad নম্বর"
+    >
+
+
+    <input
+      id="withdrawAmount"
+      type="number"
+      placeholder="কত Points Withdraw করবেন?"
+    >
+
 
     <select id="method">
-      <option value="">Payment Method নির্বাচন করুন</option>
-      <option value="bKash">bKash</option>
-      <option value="Nagad">Nagad</option>
+
+      <option value="">
+        Payment Method নির্বাচন করুন
+      </option>
+
+      <option value="bKash">
+        bKash
+      </option>
+
+      <option value="Nagad">
+        Nagad
+      </option>
+
     </select>
 
-    <button class="primary" onclick="withdraw()">
+
+    <button
+      class="primary"
+      onclick="withdraw()"
+    >
       Withdraw Request
     </button>
 
-    <p id="withdrawMessage" class="message"></p>
+
+    <p
+      id="withdrawMessage"
+      class="message"
+    ></p>
+
   </div>
 
 </section>
 
 
-<!-- REFERRAL -->
-<section id="referral" class="page">
+<!-- ================= REFERRAL ================= -->
+
+<section
+  id="referral"
+  class="page"
+>
 
   <div class="card">
-    <h2>🎁 Referral System</h2>
 
-    <p>আপনার Referral Code:</p>
+    <h2>
+      🎁 Referral System
+    </h2>
 
-    <h2 id="refCode">TASK123</h2>
+    <p>
+      আপনার Referral Code:
+    </p>
 
-    <button class="primary" onclick="copyReferral()">
+    <h2 id="refCode">
+      TASK123
+    </h2>
+
+    <button
+      class="primary"
+      onclick="copyReferral()"
+    >
       Copy Referral Code
     </button>
 
-    <p>Referral Count: <b id="refCount">0</b></p>
+    <p>
+      Referral Count:
+      <b id="refCount">0</b>
+    </p>
+
   </div>
 
 </section>
 
 
-<!-- HISTORY -->
-<section id="history" class="page">
+<!-- ================= HISTORY ================= -->
+
+<section
+  id="history"
+  class="page"
+>
 
   <div class="card">
-    <h2>📊 Earnings History</h2>
+
+    <h2>
+      📊 Earnings History
+    </h2>
 
     <table class="history">
+
       <thead>
+
         <tr>
-          <th>Task</th>
-          <th>Points</th>
+
+          <th>
+            Task
+          </th>
+
+          <th>
+            Points
+          </th>
+
         </tr>
+
       </thead>
 
-      <tbody id="historyBody">
-      </tbody>
+      <tbody
+        id="historyBody"
+      ></tbody>
+
     </table>
 
   </div>
@@ -382,664 +658,68 @@ footer{
 </section>
 
 
-<!-- LEADERBOARD -->
-<section id="leaderboard" class="page">
+<!-- ================= LEADERBOARD ================= -->
+
+<section
+  id="leaderboard"
+  class="page"
+>
 
   <div class="card">
-    <h2>🏆 Leaderboard</h2>
 
-    <p>🥇 User 1 — 500 Points</p>
-    <p>🥈 User 2 — 420 Points</p>
-    <p>🥉 User 3 — 350 Points</p>
-    <p>👤 You — <span id="leaderPoints">0</span> Points</p>
+    <h2>
+      🏆 Leaderboard
+    </h2>
+
+    <p>
+      🥇 User 1 — 500 Points
+    </p>
+
+    <p>
+      🥈 User 2 — 420 Points
+    </p>
+
+    <p>
+      🥉 User 3 — 350 Points
+    </p>
+
+    <p>
+      👤 You —
+      <span id="leaderPoints">0</span>
+      Points
+    </p>
 
   </div>
 
 </section>
+
 
 </div>
 
+
 <footer>
-  <p>© 2026 TaskEarn BD</p>
-  <p>Earn points by completing tasks</p>
+
+  <p>
+    © 2026 TaskEarn BD
+  </p>
+
+  <p>
+    Earn points by completing tasks
+  </p>
+
 </footer>
 
 
-<script>
-
-let balance = 0;
-let completed = 0;
-let referrals = 0;
-function registerUser() {
-  const email = document.getElementById("loginEmail").value;
-  const password = document.getElementById("loginPassword").value;
-  const msg = document.getElementById("authMessage");
-
-  if (!email || !password) {
-    msg.innerText = "Email এবং Password দিন।";
-    return;
-  }
-
-  if (password.length < 6) {
-    msg.innerText = "Password কমপক্ষে 6 অক্ষরের হতে হবে।";
-    return;
-  }
-
-  createUserWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      msg.innerText = "Registration সফল হয়েছে! ✅";
-    })
-    .catch((error) => {
-      msg.innerText = "Registration সমস্যা: " + error.message;
-    });
-}
-
-function loginUser() {
-  const email = document.getElementById("loginEmail").value;
-  const password = document.getElementById("loginPassword").value;
-  const msg = document.getElementById("authMessage");
-
-  if (!email || !password) {
-    msg.innerText = "Email এবং Password দিন।";
-    return;
-  }
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      msg.innerText = "Login সফল হয়েছে! ✅";
-    })
-    .catch((error) => {
-      msg.innerText = "Login সমস্যা: " + error.message;
-    });
-}
-
-function logoutUser() {
-  signOut(auth)
-    .then(() => {
-      document.getElementById("authMessage").innerText =
-        "Logout হয়েছে।";
-    })
-    .catch((error) => {
-      document.getElementById("authMessage").innerText =
-        "Logout সমস্যা: " + error.message;
-    });
-}
-
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    console.log("Logged in:", user.email);
-  } else {
-    console.log("Not logged in");
-  }
-});
-function showPage(page){
-
-  document.querySelectorAll('.page')
-    .forEach(p => p.classList.remove('active'));
-
-  document.getElementById(page)
-    .classList.add('active');
-
-  window.scrollTo(0,0);
-}
-
-
-function completeTask(points){
-
-  balance += points;
-  completed++;
-
-  document.getElementById('balance').innerText = balance;
-  document.getElementById('completed').innerText = completed;
-  document.getElementById('leaderPoints').innerText = balance;
-
-  document.getElementById('notification').innerText =
-    "Task সম্পন্ন হয়েছে! +" + points + " Points যোগ হয়েছে।";
-
-  let row = document.createElement('tr');
-
-  row.innerHTML =
-    "<td>Task Completed</td><td>+" +
-    points +
-    "</td>";
-
-  document.getElementById('historyBody')
-    .appendChild(row);
-}
-
-
-function saveProfile(){
-
-  let name = document.getElementById('name').value;
-
-  if(name.trim()===""){
-    document.getElementById('profileMessage').innerText =
-      "দয়া করে নাম লিখুন।";
-    return;
-  }
-
-  document.getElementById('profileMessage').innerText =
-    "Profile Save হয়েছে।";
-}
-
-
-function withdraw(){
-
-  let number =
-    document.getElementById('withdrawNumber').value;
-
-  let amount =
-    Number(document.getElementById('withdrawAmount').value);
-
-  let method =
-    document.getElementById('method').value;
-
-  let msg =
-    document.getElementById('withdrawMessage');
-
-  if(!number || !amount || !method){
-
-    msg.innerText =
-      "সব তথ্য পূরণ করুন।";
-
-    return;
-  }
-
-  if(amount < 50){
-
-    msg.innerText =
-      "ন্যূনতম 50 Points প্রয়োজন।";
-
-    return;
-  }
-
-  if(amount > balance){
-
-    msg.innerText =
-      "আপনার পর্যাপ্ত Points নেই।";
-
-    return;
-  }
-
-  balance -= amount;
-
-  document.getElementById('balance').innerText =
-    balance;
-
-  msg.innerText =
-    method + " Withdraw Request গ্রহণ করা হয়েছে।";
-}
-
-
-function copyReferral(){
-
-  let code =
-    document.getElementById('refCode').innerText;
-
-  navigator.clipboard.writeText(code);
-
-  alert("Referral Code Copy হয়েছে!");
-}
-
-</script>
-
-</body>
-      </html><!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TaskEarn BD</title>
-
-<style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f5f7fb;
-  color:#222;
-}
-header{
-  background:#0d6efd;
-  color:white;
-  padding:18px;
-  text-align:center;
-}
-header h1{margin:0;font-size:28px}
-header p{margin:7px 0 0}
-
-nav{
-  background:white;
-  padding:10px;
-  text-align:center;
-  box-shadow:0 2px 8px #ddd;
-  position:sticky;
-  top:0;
-  z-index:10;
-}
-nav button{
-  background:#eef4ff;
-  color:#0d6efd;
-  border:0;
-  padding:10px 13px;
-  margin:3px;
-  border-radius:7px;
-  cursor:pointer;
-}
-
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
-}
-
-.hero{
-  text-align:center;
-  padding:35px 15px;
-  background:white;
-  border-radius:15px;
-  margin-bottom:20px;
-}
-.hero h2{font-size:28px;margin:10px 0}
-.hero p{color:#666}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:15px;
-  margin-bottom:20px;
-}
-
-.card{
-  background:white;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:0 3px 12px #ddd;
-  text-align:center;
-}
-.card h3{
-  color:#0d6efd;
-  margin-top:0;
-}
-.balance{
-  font-size:28px;
-  font-weight:bold;
-  color:#198754;
-}
-
-.task{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  border-bottom:1px solid #eee;
-  padding:15px 5px;
-}
-.task:last-child{border-bottom:0}
-
-button{
-  border:0;
-  padding:11px 18px;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:15px;
-}
-.primary{background:#0d6efd;color:white}
-.success{background:#198754;color:white}
-.warning{background:#ffc107;color:#222}
-.danger{background:#dc3545;color:white}
-
-input,select{
-  width:100%;
-  padding:12px;
-  margin:7px 0;
-  border:1px solid #ccc;
-  border-radius:7px;
-}
-
-.page{display:none}
-.page.active{display:block}
-
-.history{
-  width:100%;
-  border-collapse:collapse;
-}
-.history th,.history td{
-  padding:11px;
-  border-bottom:1px solid #eee;
-  text-align:left;
-}
-
-.notice{
-  background:#fff3cd;
-  padding:12px;
-  border-radius:8px;
-  margin-bottom:15px;
-}
-
-footer{
-  margin-top:30px;
-  padding:22px;
-  background:#222;
-  color:white;
-  text-align:center;
-}
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  z-index:100;
-}
-.box{
-  background:white;
-  width:100%;
-  max-width:420px;
-  padding:25px;
-  border-radius:12px;
-}
-.close{
-  float:right;
-  font-size:24px;
-  cursor:pointer;
-}
-.message{
-  text-align:center;
-  margin-top:10px;
-  color:#198754;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <h1>TaskEarn BD</h1>
-  <p>ছোট ছোট টাস্ক সম্পন্ন করে পয়েন্ট অর্জন করুন</p>
-</header>
-
-<nav>
-  <button onclick="showPage('home')">🏠 Home</button>
-  <button onclick="showPage('tasks')">📋 Tasks</button>
-  <button onclick="showPage('profile')">👤 Profile</button>
-  <button onclick="showPage('withdraw')">💸 Withdraw</button>
-  <button onclick="showPage('referral')">🎁 Referral</button>
-  <button onclick="showPage('history')">📊 History</button>
-  <button onclick="showPage('leaderboard')">🏆 Leaderboard</button>
-</nav>
-
-<div class="container">
-
-<!-- HOME -->
-<section id="home" class="page active">
-
-  <div class="hero">
-    <h2>TaskEarn BD-তে স্বাগতম 🎉</h2>
-    <p>সহজ টাস্ক সম্পন্ন করুন এবং পয়েন্ট সংগ্রহ করুন।</p>
-    <button class="primary" onclick="showPage('tasks')">
-      টাস্ক দেখুন
-    </button>
-  </div>
-
-  <div class="stats">
-    <div class="card">
-      <h3>💰 Balance</h3>
-      <div class="balance"><span id="balance">0</span> Points</div>
-    </div>
-
-    <div class="card">
-      <h3>📋 Completed</h3>
-      <div class="balance" id="completed">0</div>
-    </div>
-
-    <div class="card">
-      <h3>🎁 Referral</h3>
-      <div class="balance" id="referrals">0</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>🔔 Notification</h3>
-    <p id="notification">TaskEarn BD-তে আপনাকে স্বাগতম!</p>
-  </div>
-
-</section>
-
-
-<!-- TASKS -->
-<section id="tasks" class="page">
-
-  <div class="card">
-    <h2>📋 Available Tasks</h2>
-
-    <div class="task">
-      <div>
-        <b>Task 1</b>
-        <p>একটি সাধারণ টাস্ক সম্পন্ন করুন</p>
-      </div>
-      <button class="success" onclick="completeTask(10)">
-        +10
-      </button>
-    </div>
-
-    <div class="task">
-      <div>
-        <b>Task 2</b>
-        <p>আরেকটি ছোট টাস্ক সম্পন্ন করুন</p>
-      </div>
-      <button class="success" onclick="completeTask(15)">
-        +15
-      </button>
-    </div>
-
-    <div class="task">
-      <div>
-        <b>Task 3</b>
-        <p>নির্ধারিত কাজটি সম্পন্ন করুন</p>
-      </div>
-      <button class="success" onclick="completeTask(20)">
-        +20
-      </button>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- PROFILE -->
-<section id="profile" class="page">
-
-  <div class="card">
-    <h2>👤 My Profile</h2>
-
-    <input id="name" type="text" placeholder="আপনার নাম">
-
-    <input id="email" type="email" placeholder="আপনার Email">
-
-    <button class="primary" onclick="saveProfile()">
-      Save Profile
-    </button>
-
-    <p id="profileMessage" class="message"></p>
-  </div>
-
-</section>
-
-
-<!-- WITHDRAW -->
-<section id="withdraw" class="page">
-
-  <div class="card">
-    <h2>💸 Withdraw Request</h2>
-
-    <div class="notice">
-      ন্যূনতম Withdraw: <b>50 Points</b>
-    </div>
-
-    <input id="withdrawNumber"
-           type="text"
-           placeholder="bKash/Nagad নম্বর">
-
-    <input id="withdrawAmount"
-           type="number"
-           placeholder="কত Points Withdraw করবেন?">
-
-    <select id="method">
-      <option value="">Payment Method নির্বাচন করুন</option>
-      <option value="bKash">bKash</option>
-      <option value="Nagad">Nagad</option>
-    </select>
-
-    <button class="primary" onclick="withdraw()">
-      Withdraw Request
-    </button>
-
-    <p id="withdrawMessage" class="message"></p>
-  </div>
-
-</section>
-
-
-<!-- REFERRAL -->
-<section id="referral" class="page">
-
-  <div class="card">
-    <h2>🎁 Referral System</h2>
-
-    <p>আপনার Referral Code:</p>
-
-    <h2 id="refCode">TASK123</h2>
-
-    <button class="primary" onclick="copyReferral()">
-      Copy Referral Code
-    </button>
-
-    <p>Referral Count: <b id="refCount">0</b></p>
-  </div>
-
-</section>
-
-
-<!-- HISTORY -->
-<section id="history" class="page">
-
-  <div class="card">
-    <h2>📊 Earnings History</h2>
-
-    <table class="history">
-      <thead>
-        <tr>
-          <th>Task</th>
-          <th>Points</th>
-        </tr>
-      </thead>
-
-      <tbody id="historyBody">
-      </tbody>
-    </table>
-
-  </div>
-
-</section>
-
-
-<!-- LEADERBOARD -->
-<section id="leaderboard" class="page">
-
-  <div class="card">
-    <h2>🏆 Leaderboard</h2>
-
-    <p>🥇 User 1 — 500 Points</p>
-    <p>🥈 User 2 — 420 Points</p>
-    <p>🥉 User 3 — 350 Points</p>
-    <p>👤 You — <span id="leaderPoints">0</span> Points</p>
-
-  </div>
-
-</section>
-
-</div>
-
-<footer>
-  <p>© 2026 TaskEarn BD</p>
-  <p>Earn points by completing tasks</p>
-</footer>
-
+<!-- ================================================= -->
+<!-- FIREBASE + WEBSITE JAVASCRIPT -->
+<!-- ================================================= -->
 
 <script type="module">
 
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-
-firebaseConfig =const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-  apiKey: "AIzaSyAsGKtFdU0Pea50Cet2w6XRs_7auHoihOk",
-  authDomain: "taskearn-bd-cd6ec.firebaseapp.com",
-  projectId: "taskearn-bd-cd6ec",
-  storageBucket: "taskearn-bd-cd6ec.firebasestorage.app",
-  messagingSenderId: "373151197702",
-  appId: "1:373151197702:web:b712e3fbcb68f0b5297187",
-  measurementId: "G-F4QG3X6PDB"
-};
-
-firebaseConfig =const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-  apiKey: "AIzaSyAsGKtFdU0Pea50Cet2w6XRs_7auHoihOk",
-  authDomain: "taskearn-bd-cd6ec.firebaseapp.com",
-  projectId: "taskearn-bd-cd6ec",
-  storageBucket: "taskearn-bd-cd6ec.firebasestorage.app",
-  messagingSenderId: "373151197702",
-  
-  measurementId: "G-F4QG3X6PDB"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-let balance = 0;
-let completed = 0;
-let referrals = 0;
-
-function showPage(page){
-
-  document.querySelectorAll('.page')
-    .forEach(p => p.classList.remove('active'));
-
-  document.getElementById(page)
-    .classList.add('active');
-
-  window.scrollTo(0,0);
-}
-
-
-function completeTask(points){
-
-  balance += points;
-  completed++;
-    document.getElementById('refCode').innerText;
-
-  navigator.clipboard.writeText(code);
-
-  alert("Referral Code Copy হয়েছে!");
-}
-window.showPage = showPage;
-window.completeTask = completeTask;
-window.saveProfile = saveProfile;
-window.withdraw = withdraw;
-window.copyReferral = copyReferral;
-
-window.registerUser = registerUser;
-window.loginUser = loginUser;
-window.logoutUser = logoutUser;
-<script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
 import {
   getAuth,
@@ -1050,168 +730,314 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 
+// ================= FIREBASE CONFIG =================
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAsGKtFdU0Pea50Cet2w6XRs_7auHoihOk",
-  authDomain: "taskearn-bd-cd6ec.firebaseapp.com",
-  projectId: "taskearn-bd-cd6ec",
-  storageBucket: "taskearn-bd-cd6ec.firebasestorage.app",
-  messagingSenderId: "373151197702",
-  appId: "1:373151197702:web:b712e3fbcb68f0b5297187",
-  measurementId: "G-F4QG3X6PDB"
+
+  apiKey:
+    "AIzaSyAsGKtFdU0Pea50Cet2w6XRs_7auHoihOk",
+
+  authDomain:
+    "taskearn-bd-cd6ec.firebaseapp.com",
+
+  projectId:
+    "taskearn-bd-cd6ec",
+
+  storageBucket:
+    "taskearn-bd-cd6ec.firebasestorage.app",
+
+  messagingSenderId:
+    "373151197702",
+
+  appId:
+    "1:373151197702:web:b712e3fbcb68f0b5297187",
+
+  measurementId:
+    "G-F4QG3X6PDB"
+
 };
 
 
+// ================= INITIALIZE FIREBASE =================
+
 const app = initializeApp(firebaseConfig);
+
 const auth = getAuth(app);
 
 
+// ================= VARIABLES =================
+
 let balance = 0;
+
 let completed = 0;
+
 let referrals = 0;
 
 
+// ================= PAGE SYSTEM =================
+
 function showPage(page){
 
-  document.querySelectorAll('.page')
-    .forEach(p => p.classList.remove('active'));
+  document
+    .querySelectorAll(".page")
+    .forEach(function(p){
 
-  document.getElementById(page)
-    .classList.add('active');
+      p.classList.remove("active");
+
+    });
+
+
+  const selectedPage =
+    document.getElementById(page);
+
+
+  if(selectedPage){
+
+    selectedPage.classList.add("active");
+
+  }
+
 
   window.scrollTo(0,0);
+
 }
 
+
+// ================= TASK SYSTEM =================
 
 function completeTask(points){
 
   balance += points;
+
   completed++;
 
-  document.getElementById('balance').innerText = balance;
-  document.getElementById('completed').innerText = completed;
-  document.getElementById('leaderPoints').innerText = balance;
 
-  document.getElementById('notification').innerText =
-    "Task সম্পন্ন হয়েছে! +" + points + " Points যোগ হয়েছে।";
+  document.getElementById("balance").innerText =
+    balance;
 
-  let row = document.createElement('tr');
+  document.getElementById("completed").innerText =
+    completed;
+
+  document.getElementById("leaderPoints").innerText =
+    balance;
+
+
+  document.getElementById("notification").innerText =
+    "Task সম্পন্ন হয়েছে! +" +
+    points +
+    " Points যোগ হয়েছে।";
+
+
+  const row =
+    document.createElement("tr");
+
 
   row.innerHTML =
-    "<td>Task Completed</td><td>+" +
+    "<td>Task Completed</td>" +
+    "<td>+" +
     points +
     "</td>";
 
-  document.getElementById('historyBody')
+
+  document
+    .getElementById("historyBody")
     .appendChild(row);
+
 }
 
+
+// ================= PROFILE =================
 
 function saveProfile(){
 
-  let name = document.getElementById('name').value;
+  const name =
+    document.getElementById("name").value.trim();
 
-  if(name.trim()===""){
 
-    document.getElementById('profileMessage').innerText =
+  const email =
+    document.getElementById("profileEmail").value.trim();
+
+
+  const message =
+    document.getElementById("profileMessage");
+
+
+  if(name === ""){
+
+    message.innerText =
       "দয়া করে নাম লিখুন।";
 
     return;
+
   }
 
-  document.getElementById('profileMessage').innerText =
+
+  message.innerText =
     "Profile Save হয়েছে।";
+
 }
 
+
+// ================= WITHDRAW =================
 
 function withdraw(){
 
-  let number =
-    document.getElementById('withdrawNumber').value;
+  const number =
+    document
+      .getElementById("withdrawNumber")
+      .value
+      .trim();
 
-  let amount =
-    Number(document.getElementById('withdrawAmount').value);
 
-  let method =
-    document.getElementById('method').value;
+  const amount =
+    Number(
+      document
+        .getElementById("withdrawAmount")
+        .value
+    );
 
-  let msg =
-    document.getElementById('withdrawMessage');
 
-  if(!number || !amount || !method){
+  const method =
+    document
+      .getElementById("method")
+      .value;
 
-    msg.innerText =
+
+  const message =
+    document.getElementById(
+      "withdrawMessage"
+    );
+
+
+  if(
+    number === "" ||
+    amount <= 0 ||
+    method === ""
+  ){
+
+    message.innerText =
       "সব তথ্য পূরণ করুন।";
 
     return;
+
   }
+
 
   if(amount < 50){
 
-    msg.innerText =
+    message.innerText =
       "ন্যূনতম 50 Points প্রয়োজন।";
 
     return;
+
   }
+
 
   if(amount > balance){
 
-    msg.innerText =
+    message.innerText =
       "আপনার পর্যাপ্ত Points নেই।";
 
     return;
+
   }
+
 
   balance -= amount;
 
-  document.getElementById('balance').innerText =
-    balance;
 
-  msg.innerText =
-    method + " Withdraw Request গ্রহণ করা হয়েছে।";
+  document.getElementById(
+    "balance"
+  ).innerText = balance;
+
+
+  document.getElementById(
+    "leaderPoints"
+  ).innerText = balance;
+
+
+  message.innerText =
+    method +
+    " Withdraw Request গ্রহণ করা হয়েছে।";
+
 }
 
+
+// ================= REFERRAL =================
 
 function copyReferral(){
 
-  let code =
-    document.getElementById('refCode').innerText;
+  const code =
+    document
+      .getElementById("refCode")
+      .innerText;
 
-  navigator.clipboard.writeText(code);
 
-  alert("Referral Code Copy হয়েছে!");
+  navigator.clipboard
+    .writeText(code)
+    .then(function(){
+
+      alert(
+        "Referral Code Copy হয়েছে!"
+      );
+
+    })
+    .catch(function(){
+
+      alert(
+        "Code Copy করা যায়নি।"
+      );
+
+    });
+
 }
 
 
-/* REGISTER */
+// ================= REGISTER =================
 
 function registerUser(){
 
   const email =
-    document.getElementById("loginEmail").value;
+    document
+      .getElementById("loginEmail")
+      .value
+      .trim();
+
 
   const password =
-    document.getElementById("loginPassword").value;
+    document
+      .getElementById("loginPassword")
+      .value;
 
-  const msg =
-    document.getElementById("authMessage");
+
+  const message =
+    document.getElementById(
+      "authMessage"
+    );
 
 
-  if(!email || !password){
+  if(email === "" || password === ""){
 
-    msg.innerText =
+    message.innerText =
       "Email এবং Password দিন।";
 
     return;
+
   }
 
 
   if(password.length < 6){
 
-    msg.innerText =
+    message.innerText =
       "Password কমপক্ষে 6 অক্ষরের হতে হবে।";
 
     return;
+
   }
+
+
+  message.innerText =
+    "Registration হচ্ছে...";
 
 
   createUserWithEmailAndPassword(
@@ -1220,16 +1046,23 @@ function registerUser(){
     password
   )
 
-  .then(() => {
+  .then(function(userCredential){
 
-    msg.innerText =
+    message.innerText =
       "Registration সফল হয়েছে! ✅";
+
+    console.log(
+      "Registered:",
+      userCredential.user.email
+    );
 
   })
 
-  .catch((error) => {
+  .catch(function(error){
 
-    msg.innerText =
+    console.error(error);
+
+    message.innerText =
       "Registration সমস্যা: " +
       error.message;
 
@@ -1238,105 +1071,9 @@ function registerUser(){
 }
 
 
-/* LOGIN */
+// ================= LOGIN =================
 
 function loginUser(){
 
   const email =
-    document.getElementById("loginEmail").value;
-
-  const password =
-    document.getElementById("loginPassword").value;
-
-  const msg =
-    document.getElementById("authMessage");
-
-
-  if(!email || !password){
-
-    msg.innerText =
-      "Email এবং Password দিন।";
-
-    return;
-  }
-
-
-  signInWithEmailAndPassword(
-    auth,
-    email,
-    password
-  )
-
-  .then(() => {
-
-    msg.innerText =
-      "Login সফল হয়েছে! ✅";
-
-  })
-
-  .catch((error) => {
-
-    msg.innerText =
-      "Login সমস্যা: " +
-      error.message;
-
-  });
-
-}
-
-
-/* LOGOUT */
-
-function logoutUser(){
-
-  signOut(auth)
-
-  .then(() => {
-
-    document.getElementById("authMessage").innerText =
-      "Logout হয়েছে।";
-
-  })
-
-  .catch((error) => {
-
-    document.getElementById("authMessage").innerText =
-      "Logout সমস্যা: " +
-      error.message;
-
-  });
-
-}
-
-
-/* LOGIN STATUS */
-
-onAuthStateChanged(auth, (user) => {
-
-  if(user){
-
-    console.log("Logged in:", user.email);
-
-  }else{
-
-    console.log("Not logged in");
-
-  }
-
-});
-
-
-/* BUTTON FUNCTIONS */
-
-window.showPage = showPage;
-window.completeTask = completeTask;
-window.saveProfile = saveProfile;
-window.withdraw = withdraw;
-window.copyReferral = copyReferral;
-
-window.registerUser = registerUser;
-window.loginUser = loginUser;
-window.logoutUser = logoutUser;
-
-</script>
 
