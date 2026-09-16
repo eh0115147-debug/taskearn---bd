@@ -187,7 +187,27 @@ footer{
 </nav>
 
 <div class="container">
+<div class="card" style="margin:20px auto; max-width:420px;">
+  <h2>🔐 Account</h2>
 
+  <input id="loginEmail" type="email" placeholder="Email লিখুন">
+
+  <input id="loginPassword" type="password" placeholder="Password লিখুন">
+
+  <button class="primary" onclick="loginUser()">
+    Login
+  </button>
+
+  <button class="success" onclick="registerUser()">
+    Register
+  </button>
+
+  <button class="danger" onclick="logoutUser()">
+    Logout
+  </button>
+
+  <p id="authMessage" class="message"></p>
+  </div>
 <!-- HOME -->
 <section id="home" class="page active">
 
@@ -390,7 +410,68 @@ footer{
 let balance = 0;
 let completed = 0;
 let referrals = 0;
+function registerUser() {
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+  const msg = document.getElementById("authMessage");
 
+  if (!email || !password) {
+    msg.innerText = "Email এবং Password দিন।";
+    return;
+  }
+
+  if (password.length < 6) {
+    msg.innerText = "Password কমপক্ষে 6 অক্ষরের হতে হবে।";
+    return;
+  }
+
+  createUserWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      msg.innerText = "Registration সফল হয়েছে! ✅";
+    })
+    .catch((error) => {
+      msg.innerText = "Registration সমস্যা: " + error.message;
+    });
+}
+
+function loginUser() {
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+  const msg = document.getElementById("authMessage");
+
+  if (!email || !password) {
+    msg.innerText = "Email এবং Password দিন।";
+    return;
+  }
+
+  signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      msg.innerText = "Login সফল হয়েছে! ✅";
+    })
+    .catch((error) => {
+      msg.innerText = "Login সমস্যা: " + error.message;
+    });
+}
+
+function logoutUser() {
+  signOut(auth)
+    .then(() => {
+      document.getElementById("authMessage").innerText =
+        "Logout হয়েছে।";
+    })
+    .catch((error) => {
+      document.getElementById("authMessage").innerText =
+        "Logout সমস্যা: " + error.message;
+    });
+}
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log("Logged in:", user.email);
+  } else {
+    console.log("Not logged in");
+  }
+});
 function showPage(page){
 
   document.querySelectorAll('.page')
@@ -896,7 +977,8 @@ footer{
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-const firebaseConfig = {
+firebaseConfig =const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
   apiKey: "AIzaSyAsGKtFdU0Pea50Cet2w6XRs_7auHoihOk",
   authDomain: "taskearn-bd-cd6ec.firebaseapp.com",
   projectId: "taskearn-bd-cd6ec",
@@ -906,13 +988,14 @@ const firebaseConfig = {
   measurementId: "G-F4QG3X6PDB"
 };
 
-const firebaseConfig = {
+firebaseConfig =const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
   apiKey: "AIzaSyAsGKtFdU0Pea50Cet2w6XRs_7auHoihOk",
   authDomain: "taskearn-bd-cd6ec.firebaseapp.com",
   projectId: "taskearn-bd-cd6ec",
   storageBucket: "taskearn-bd-cd6ec.firebasestorage.app",
   messagingSenderId: "373151197702",
-  appId: "1:373151197702:web:b712e3fbcb68f0b5297187",
+  
   measurementId: "G-F4QG3X6PDB"
 };
 
@@ -920,12 +1003,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 let balance = 0;
-let completed = 0;
-let referrals = 0;
-
-let balance = 0;
-
-  
 let completed = 0;
 let referrals = 0;
 
@@ -1037,6 +1114,14 @@ function copyReferral(){
 
   alert("Referral Code Copy হয়েছে!");
 }
+window.showPage = showPage;
+window.completeTask = completeTask;
+window.saveProfile = saveProfile;
+window.withdraw = withdraw;
+window.copyReferral = copyReferral;
 
+window.registerUser = registerUser;
+window.loginUser = loginUser;
+window.logoutUser = logoutUser;
 </script>
 
