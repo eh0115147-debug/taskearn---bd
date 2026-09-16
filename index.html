@@ -890,9 +890,42 @@ footer{
 </footer>
 
 
-<script>
+<script type="module">
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "আপনার API KEY",
+  authDomain: "taskearn-bd-cd6ec.firebaseapp.com",
+  projectId: "taskearn-bd-cd6ec",
+  storageBucket: "taskearn-bd-cd6ec.firebasestorage.app",
+  messagingSenderId: "373151197702",
+  appId: "1:373151197702:web:b712e3fbcb68f0b5297187",
+  measurementId: "G-F4QG3X6PDB"
+};
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAsGKtFdU0Pea50Cet2w6XRs_7auHoihOk",
+  authDomain: "taskearn-bd-cd6ec.firebaseapp.com",
+  projectId: "taskearn-bd-cd6ec",
+  storageBucket: "taskearn-bd-cd6ec.firebasestorage.app",
+  messagingSenderId: "373151197702",
+  appId: "1:373151197702:web:b712e3fbcb68f0b5297187",
+  measurementId: "G-F4QG3X6PDB"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 let balance = 0;
+let completed = 0;
+let referrals = 0;
+
+let balance = 0;
+
+  
 let completed = 0;
 let referrals = 0;
 
@@ -1007,5 +1040,3 @@ function copyReferral(){
 
 </script>
 
-</body>
-</html>
