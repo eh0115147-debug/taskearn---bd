@@ -20,45 +20,125 @@ header{
   text-align:center;
 }
 header h1{margin:0;font-size:28px}
+header p{margin:7px 0 0}
+
+nav{
+  background:white;
+  padding:10px;
+  text-align:center;
+  box-shadow:0 2px 8px #ddd;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+nav button{
+  background:#eef4ff;
+  color:#0d6efd;
+  border:0;
+  padding:10px 13px;
+  margin:3px;
+  border-radius:7px;
+  cursor:pointer;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
 .hero{
   text-align:center;
-  padding:55px 20px;
+  padding:35px 15px;
   background:white;
+  border-radius:15px;
+  margin-bottom:20px;
 }
-.hero h2{font-size:30px;margin:10px 0}
-.hero p{font-size:17px;color:#555}
-button{
-  border:0;
-  padding:13px 22px;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:16px;
-  margin:5px;
-}
-.login{background:#0d6efd;color:white}
-.register{background:#198754;color:white}
-.cards{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
+.hero h2{font-size:28px;margin:10px 0}
+.hero p{color:#666}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
   gap:15px;
-  padding:30px 15px;
+  margin-bottom:20px;
 }
+
 .card{
   background:white;
-  width:220px;
-  padding:25px 15px;
-  text-align:center;
+  padding:20px;
   border-radius:12px;
   box-shadow:0 3px 12px #ddd;
-}
-.card h3{color:#0d6efd}
-footer{
   text-align:center;
-  padding:20px;
+}
+.card h3{
+  color:#0d6efd;
+  margin-top:0;
+}
+.balance{
+  font-size:28px;
+  font-weight:bold;
+  color:#198754;
+}
+
+.task{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  border-bottom:1px solid #eee;
+  padding:15px 5px;
+}
+.task:last-child{border-bottom:0}
+
+button{
+  border:0;
+  padding:11px 18px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:15px;
+}
+.primary{background:#0d6efd;color:white}
+.success{background:#198754;color:white}
+.warning{background:#ffc107;color:#222}
+.danger{background:#dc3545;color:white}
+
+input,select{
+  width:100%;
+  padding:12px;
+  margin:7px 0;
+  border:1px solid #ccc;
+  border-radius:7px;
+}
+
+.page{display:none}
+.page.active{display:block}
+
+.history{
+  width:100%;
+  border-collapse:collapse;
+}
+.history th,.history td{
+  padding:11px;
+  border-bottom:1px solid #eee;
+  text-align:left;
+}
+
+.notice{
+  background:#fff3cd;
+  padding:12px;
+  border-radius:8px;
+  margin-bottom:15px;
+}
+
+footer{
+  margin-top:30px;
+  padding:22px;
   background:#222;
   color:white;
+  text-align:center;
 }
+
 .modal{
   display:none;
   position:fixed;
@@ -67,21 +147,14 @@ footer{
   justify-content:center;
   align-items:center;
   padding:20px;
+  z-index:100;
 }
 .box{
   background:white;
   width:100%;
-  max-width:400px;
+  max-width:420px;
   padding:25px;
   border-radius:12px;
-}
-.box h2{text-align:center}
-input{
-  width:100%;
-  padding:13px;
-  margin:8px 0;
-  border:1px solid #ccc;
-  border-radius:7px;
 }
 .close{
   float:right;
@@ -91,7 +164,7 @@ input{
 .message{
   text-align:center;
   margin-top:10px;
-  font-size:14px;
+  color:#198754;
 }
 </style>
 </head>
@@ -103,4 +176,836 @@ input{
   <p>ছোট ছোট টাস্ক সম্পন্ন করে পয়েন্ট অর্জন করুন</p>
 </header>
 
-<section
+<nav>
+  <button onclick="showPage('home')">🏠 Home</button>
+  <button onclick="showPage('tasks')">📋 Tasks</button>
+  <button onclick="showPage('profile')">👤 Profile</button>
+  <button onclick="showPage('withdraw')">💸 Withdraw</button>
+  <button onclick="showPage('referral')">🎁 Referral</button>
+  <button onclick="showPage('history')">📊 History</button>
+  <button onclick="showPage('leaderboard')">🏆 Leaderboard</button>
+</nav>
+
+<div class="container">
+
+<!-- HOME -->
+<section id="home" class="page active">
+
+  <div class="hero">
+    <h2>TaskEarn BD-তে স্বাগতম 🎉</h2>
+    <p>সহজ টাস্ক সম্পন্ন করুন এবং পয়েন্ট সংগ্রহ করুন।</p>
+    <button class="primary" onclick="showPage('tasks')">
+      টাস্ক দেখুন
+    </button>
+  </div>
+
+  <div class="stats">
+    <div class="card">
+      <h3>💰 Balance</h3>
+      <div class="balance"><span id="balance">0</span> Points</div>
+    </div>
+
+    <div class="card">
+      <h3>📋 Completed</h3>
+      <div class="balance" id="completed">0</div>
+    </div>
+
+    <div class="card">
+      <h3>🎁 Referral</h3>
+      <div class="balance" id="referrals">0</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🔔 Notification</h3>
+    <p id="notification">TaskEarn BD-তে আপনাকে স্বাগতম!</p>
+  </div>
+
+</section>
+
+
+<!-- TASKS -->
+<section id="tasks" class="page">
+
+  <div class="card">
+    <h2>📋 Available Tasks</h2>
+
+    <div class="task">
+      <div>
+        <b>Task 1</b>
+        <p>একটি সাধারণ টাস্ক সম্পন্ন করুন</p>
+      </div>
+      <button class="success" onclick="completeTask(10)">
+        +10
+      </button>
+    </div>
+
+    <div class="task">
+      <div>
+        <b>Task 2</b>
+        <p>আরেকটি ছোট টাস্ক সম্পন্ন করুন</p>
+      </div>
+      <button class="success" onclick="completeTask(15)">
+        +15
+      </button>
+    </div>
+
+    <div class="task">
+      <div>
+        <b>Task 3</b>
+        <p>নির্ধারিত কাজটি সম্পন্ন করুন</p>
+      </div>
+      <button class="success" onclick="completeTask(20)">
+        +20
+      </button>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PROFILE -->
+<section id="profile" class="page">
+
+  <div class="card">
+    <h2>👤 My Profile</h2>
+
+    <input id="name" type="text" placeholder="আপনার নাম">
+
+    <input id="email" type="email" placeholder="আপনার Email">
+
+    <button class="primary" onclick="saveProfile()">
+      Save Profile
+    </button>
+
+    <p id="profileMessage" class="message"></p>
+  </div>
+
+</section>
+
+
+<!-- WITHDRAW -->
+<section id="withdraw" class="page">
+
+  <div class="card">
+    <h2>💸 Withdraw Request</h2>
+
+    <div class="notice">
+      ন্যূনতম Withdraw: <b>50 Points</b>
+    </div>
+
+    <input id="withdrawNumber"
+           type="text"
+           placeholder="bKash/Nagad নম্বর">
+
+    <input id="withdrawAmount"
+           type="number"
+           placeholder="কত Points Withdraw করবেন?">
+
+    <select id="method">
+      <option value="">Payment Method নির্বাচন করুন</option>
+      <option value="bKash">bKash</option>
+      <option value="Nagad">Nagad</option>
+    </select>
+
+    <button class="primary" onclick="withdraw()">
+      Withdraw Request
+    </button>
+
+    <p id="withdrawMessage" class="message"></p>
+  </div>
+
+</section>
+
+
+<!-- REFERRAL -->
+<section id="referral" class="page">
+
+  <div class="card">
+    <h2>🎁 Referral System</h2>
+
+    <p>আপনার Referral Code:</p>
+
+    <h2 id="refCode">TASK123</h2>
+
+    <button class="primary" onclick="copyReferral()">
+      Copy Referral Code
+    </button>
+
+    <p>Referral Count: <b id="refCount">0</b></p>
+  </div>
+
+</section>
+
+
+<!-- HISTORY -->
+<section id="history" class="page">
+
+  <div class="card">
+    <h2>📊 Earnings History</h2>
+
+    <table class="history">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+
+      <tbody id="historyBody">
+      </tbody>
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- LEADERBOARD -->
+<section id="leaderboard" class="page">
+
+  <div class="card">
+    <h2>🏆 Leaderboard</h2>
+
+    <p>🥇 User 1 — 500 Points</p>
+    <p>🥈 User 2 — 420 Points</p>
+    <p>🥉 User 3 — 350 Points</p>
+    <p>👤 You — <span id="leaderPoints">0</span> Points</p>
+
+  </div>
+
+</section>
+
+</div>
+
+<footer>
+  <p>© 2026 TaskEarn BD</p>
+  <p>Earn points by completing tasks</p>
+</footer>
+
+
+<script>
+
+let balance = 0;
+let completed = 0;
+let referrals = 0;
+
+function showPage(page){
+
+  document.querySelectorAll('.page')
+    .forEach(p => p.classList.remove('active'));
+
+  document.getElementById(page)
+    .classList.add('active');
+
+  window.scrollTo(0,0);
+}
+
+
+function completeTask(points){
+
+  balance += points;
+  completed++;
+
+  document.getElementById('balance').innerText = balance;
+  document.getElementById('completed').innerText = completed;
+  document.getElementById('leaderPoints').innerText = balance;
+
+  document.getElementById('notification').innerText =
+    "Task সম্পন্ন হয়েছে! +" + points + " Points যোগ হয়েছে।";
+
+  let row = document.createElement('tr');
+
+  row.innerHTML =
+    "<td>Task Completed</td><td>+" +
+    points +
+    "</td>";
+
+  document.getElementById('historyBody')
+    .appendChild(row);
+}
+
+
+function saveProfile(){
+
+  let name = document.getElementById('name').value;
+
+  if(name.trim()===""){
+    document.getElementById('profileMessage').innerText =
+      "দয়া করে নাম লিখুন।";
+    return;
+  }
+
+  document.getElementById('profileMessage').innerText =
+    "Profile Save হয়েছে।";
+}
+
+
+function withdraw(){
+
+  let number =
+    document.getElementById('withdrawNumber').value;
+
+  let amount =
+    Number(document.getElementById('withdrawAmount').value);
+
+  let method =
+    document.getElementById('method').value;
+
+  let msg =
+    document.getElementById('withdrawMessage');
+
+  if(!number || !amount || !method){
+
+    msg.innerText =
+      "সব তথ্য পূরণ করুন।";
+
+    return;
+  }
+
+  if(amount < 50){
+
+    msg.innerText =
+      "ন্যূনতম 50 Points প্রয়োজন।";
+
+    return;
+  }
+
+  if(amount > balance){
+
+    msg.innerText =
+      "আপনার পর্যাপ্ত Points নেই।";
+
+    return;
+  }
+
+  balance -= amount;
+
+  document.getElementById('balance').innerText =
+    balance;
+
+  msg.innerText =
+    method + " Withdraw Request গ্রহণ করা হয়েছে।";
+}
+
+
+function copyReferral(){
+
+  let code =
+    document.getElementById('refCode').innerText;
+
+  navigator.clipboard.writeText(code);
+
+  alert("Referral Code Copy হয়েছে!");
+}
+
+</script>
+
+</body>
+      </html><!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaskEarn BD</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f5f7fb;
+  color:#222;
+}
+header{
+  background:#0d6efd;
+  color:white;
+  padding:18px;
+  text-align:center;
+}
+header h1{margin:0;font-size:28px}
+header p{margin:7px 0 0}
+
+nav{
+  background:white;
+  padding:10px;
+  text-align:center;
+  box-shadow:0 2px 8px #ddd;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+nav button{
+  background:#eef4ff;
+  color:#0d6efd;
+  border:0;
+  padding:10px 13px;
+  margin:3px;
+  border-radius:7px;
+  cursor:pointer;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+.hero{
+  text-align:center;
+  padding:35px 15px;
+  background:white;
+  border-radius:15px;
+  margin-bottom:20px;
+}
+.hero h2{font-size:28px;margin:10px 0}
+.hero p{color:#666}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 3px 12px #ddd;
+  text-align:center;
+}
+.card h3{
+  color:#0d6efd;
+  margin-top:0;
+}
+.balance{
+  font-size:28px;
+  font-weight:bold;
+  color:#198754;
+}
+
+.task{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  border-bottom:1px solid #eee;
+  padding:15px 5px;
+}
+.task:last-child{border-bottom:0}
+
+button{
+  border:0;
+  padding:11px 18px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:15px;
+}
+.primary{background:#0d6efd;color:white}
+.success{background:#198754;color:white}
+.warning{background:#ffc107;color:#222}
+.danger{background:#dc3545;color:white}
+
+input,select{
+  width:100%;
+  padding:12px;
+  margin:7px 0;
+  border:1px solid #ccc;
+  border-radius:7px;
+}
+
+.page{display:none}
+.page.active{display:block}
+
+.history{
+  width:100%;
+  border-collapse:collapse;
+}
+.history th,.history td{
+  padding:11px;
+  border-bottom:1px solid #eee;
+  text-align:left;
+}
+
+.notice{
+  background:#fff3cd;
+  padding:12px;
+  border-radius:8px;
+  margin-bottom:15px;
+}
+
+footer{
+  margin-top:30px;
+  padding:22px;
+  background:#222;
+  color:white;
+  text-align:center;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  z-index:100;
+}
+.box{
+  background:white;
+  width:100%;
+  max-width:420px;
+  padding:25px;
+  border-radius:12px;
+}
+.close{
+  float:right;
+  font-size:24px;
+  cursor:pointer;
+}
+.message{
+  text-align:center;
+  margin-top:10px;
+  color:#198754;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>TaskEarn BD</h1>
+  <p>ছোট ছোট টাস্ক সম্পন্ন করে পয়েন্ট অর্জন করুন</p>
+</header>
+
+<nav>
+  <button onclick="showPage('home')">🏠 Home</button>
+  <button onclick="showPage('tasks')">📋 Tasks</button>
+  <button onclick="showPage('profile')">👤 Profile</button>
+  <button onclick="showPage('withdraw')">💸 Withdraw</button>
+  <button onclick="showPage('referral')">🎁 Referral</button>
+  <button onclick="showPage('history')">📊 History</button>
+  <button onclick="showPage('leaderboard')">🏆 Leaderboard</button>
+</nav>
+
+<div class="container">
+
+<!-- HOME -->
+<section id="home" class="page active">
+
+  <div class="hero">
+    <h2>TaskEarn BD-তে স্বাগতম 🎉</h2>
+    <p>সহজ টাস্ক সম্পন্ন করুন এবং পয়েন্ট সংগ্রহ করুন।</p>
+    <button class="primary" onclick="showPage('tasks')">
+      টাস্ক দেখুন
+    </button>
+  </div>
+
+  <div class="stats">
+    <div class="card">
+      <h3>💰 Balance</h3>
+      <div class="balance"><span id="balance">0</span> Points</div>
+    </div>
+
+    <div class="card">
+      <h3>📋 Completed</h3>
+      <div class="balance" id="completed">0</div>
+    </div>
+
+    <div class="card">
+      <h3>🎁 Referral</h3>
+      <div class="balance" id="referrals">0</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🔔 Notification</h3>
+    <p id="notification">TaskEarn BD-তে আপনাকে স্বাগতম!</p>
+  </div>
+
+</section>
+
+
+<!-- TASKS -->
+<section id="tasks" class="page">
+
+  <div class="card">
+    <h2>📋 Available Tasks</h2>
+
+    <div class="task">
+      <div>
+        <b>Task 1</b>
+        <p>একটি সাধারণ টাস্ক সম্পন্ন করুন</p>
+      </div>
+      <button class="success" onclick="completeTask(10)">
+        +10
+      </button>
+    </div>
+
+    <div class="task">
+      <div>
+        <b>Task 2</b>
+        <p>আরেকটি ছোট টাস্ক সম্পন্ন করুন</p>
+      </div>
+      <button class="success" onclick="completeTask(15)">
+        +15
+      </button>
+    </div>
+
+    <div class="task">
+      <div>
+        <b>Task 3</b>
+        <p>নির্ধারিত কাজটি সম্পন্ন করুন</p>
+      </div>
+      <button class="success" onclick="completeTask(20)">
+        +20
+      </button>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PROFILE -->
+<section id="profile" class="page">
+
+  <div class="card">
+    <h2>👤 My Profile</h2>
+
+    <input id="name" type="text" placeholder="আপনার নাম">
+
+    <input id="email" type="email" placeholder="আপনার Email">
+
+    <button class="primary" onclick="saveProfile()">
+      Save Profile
+    </button>
+
+    <p id="profileMessage" class="message"></p>
+  </div>
+
+</section>
+
+
+<!-- WITHDRAW -->
+<section id="withdraw" class="page">
+
+  <div class="card">
+    <h2>💸 Withdraw Request</h2>
+
+    <div class="notice">
+      ন্যূনতম Withdraw: <b>50 Points</b>
+    </div>
+
+    <input id="withdrawNumber"
+           type="text"
+           placeholder="bKash/Nagad নম্বর">
+
+    <input id="withdrawAmount"
+           type="number"
+           placeholder="কত Points Withdraw করবেন?">
+
+    <select id="method">
+      <option value="">Payment Method নির্বাচন করুন</option>
+      <option value="bKash">bKash</option>
+      <option value="Nagad">Nagad</option>
+    </select>
+
+    <button class="primary" onclick="withdraw()">
+      Withdraw Request
+    </button>
+
+    <p id="withdrawMessage" class="message"></p>
+  </div>
+
+</section>
+
+
+<!-- REFERRAL -->
+<section id="referral" class="page">
+
+  <div class="card">
+    <h2>🎁 Referral System</h2>
+
+    <p>আপনার Referral Code:</p>
+
+    <h2 id="refCode">TASK123</h2>
+
+    <button class="primary" onclick="copyReferral()">
+      Copy Referral Code
+    </button>
+
+    <p>Referral Count: <b id="refCount">0</b></p>
+  </div>
+
+</section>
+
+
+<!-- HISTORY -->
+<section id="history" class="page">
+
+  <div class="card">
+    <h2>📊 Earnings History</h2>
+
+    <table class="history">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+
+      <tbody id="historyBody">
+      </tbody>
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- LEADERBOARD -->
+<section id="leaderboard" class="page">
+
+  <div class="card">
+    <h2>🏆 Leaderboard</h2>
+
+    <p>🥇 User 1 — 500 Points</p>
+    <p>🥈 User 2 — 420 Points</p>
+    <p>🥉 User 3 — 350 Points</p>
+    <p>👤 You — <span id="leaderPoints">0</span> Points</p>
+
+  </div>
+
+</section>
+
+</div>
+
+<footer>
+  <p>© 2026 TaskEarn BD</p>
+  <p>Earn points by completing tasks</p>
+</footer>
+
+
+<script>
+
+let balance = 0;
+let completed = 0;
+let referrals = 0;
+
+function showPage(page){
+
+  document.querySelectorAll('.page')
+    .forEach(p => p.classList.remove('active'));
+
+  document.getElementById(page)
+    .classList.add('active');
+
+  window.scrollTo(0,0);
+}
+
+
+function completeTask(points){
+
+  balance += points;
+  completed++;
+
+  document.getElementById('balance').innerText = balance;
+  document.getElementById('completed').innerText = completed;
+  document.getElementById('leaderPoints').innerText = balance;
+
+  document.getElementById('notification').innerText =
+    "Task সম্পন্ন হয়েছে! +" + points + " Points যোগ হয়েছে।";
+
+  let row = document.createElement('tr');
+
+  row.innerHTML =
+    "<td>Task Completed</td><td>+" +
+    points +
+    "</td>";
+
+  document.getElementById('historyBody')
+    .appendChild(row);
+}
+
+
+function saveProfile(){
+
+  let name = document.getElementById('name').value;
+
+  if(name.trim()===""){
+    document.getElementById('profileMessage').innerText =
+      "দয়া করে নাম লিখুন।";
+    return;
+  }
+
+  document.getElementById('profileMessage').innerText =
+    "Profile Save হয়েছে।";
+}
+
+
+function withdraw(){
+
+  let number =
+    document.getElementById('withdrawNumber').value;
+
+  let amount =
+    Number(document.getElementById('withdrawAmount').value);
+
+  let method =
+    document.getElementById('method').value;
+
+  let msg =
+    document.getElementById('withdrawMessage');
+
+  if(!number || !amount || !method){
+
+    msg.innerText =
+      "সব তথ্য পূরণ করুন।";
+
+    return;
+  }
+
+  if(amount < 50){
+
+    msg.innerText =
+      "ন্যূনতম 50 Points প্রয়োজন।";
+
+    return;
+  }
+
+  if(amount > balance){
+
+    msg.innerText =
+      "আপনার পর্যাপ্ত Points নেই।";
+
+    return;
+  }
+
+  balance -= amount;
+
+  document.getElementById('balance').innerText =
+    balance;
+
+  msg.innerText =
+    method + " Withdraw Request গ্রহণ করা হয়েছে।";
+}
+
+
+function copyReferral(){
+
+  let code =
+    document.getElementById('refCode').innerText;
+
+  navigator.clipboard.writeText(code);
+
+  alert("Referral Code Copy হয়েছে!");
+}
+
+</script>
+
+</body>
+</html>
